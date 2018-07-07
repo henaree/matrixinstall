@@ -116,8 +116,6 @@ In this case, ```<user>``` should be ```synapse_user```,```<pass>``` should be t
 
 We need to make a dumb change to the pg_hba.conf cus idk why. Something is up the way authentication is being handled.
 
-Deactivate virtual environment by entering the command ```deactivate```
-
 edit pg_hba.conf
 
 ```bash
