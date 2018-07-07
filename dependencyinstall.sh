@@ -87,11 +87,12 @@ echo
 echo Installing Cerbot
 sudo yum install certbot-nginx -y
 echo 
-echo Opening firewall ports 443 and 80
+echo Opening firewall ports 443, 80 and 8080
 echo
 sudo firewall-cmd --add-service=http
 sudo firewall-cmd --add-service=https
 sudo firewall-cmd --runtime-to-permanent
+sudo firewall-cmd --zone=public --add-port=8008/tcp --permanent
 sudo firewall-cmd --reload
 echo
 echo Installation Complete!
