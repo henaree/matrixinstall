@@ -74,5 +74,25 @@ export PATH=/usr/pgsql-10.2/bin/:$PATH
 pip install psycopg2
 echo
 deactivate
+echo
+echo Installing nginx
+echo
+sudo yum install epel-release -y
+sudo yum install nginx -y
+echo
+echo Starting and enabling nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+echo
+echo Installing Cerbot
+sudo yum install certbot-nginx -y
+echo 
+echo Opening firewall ports 443 and 80
+echo
+sudo firewall-cmd --add-service=http
+sudo firewall-cmd --add-service=https
+sudo firewall-cmd --runtime-to-permanent
+sudo firewall-cmd --reload
+echo
 echo Installation Complete!
 
