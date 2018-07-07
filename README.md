@@ -141,7 +141,7 @@ sudo systemctl stop postgresql
 sudo systemctl start postgresql
 ```
 
-Step 3. Start Synapse and Create a new user
+### Step 3. Start Synapse and Create a new user
 
 Start Synapse
 
@@ -156,8 +156,81 @@ Create a new user. Username will display publicly as @username:domain.com
 ```bash
 register_new_matrix_user -c homeserver.yaml http://localhost:8008
 ```
+## Step 4. Configuring nginx
 
-### TODO:
+Edit nginx config file
 
--add nginx configuration, firwall ports, lets ecnrypt
+```bash
+sudo vi /etc/nginx/nginx.conf
+```
+
+Find ```server{``` and ammend it to match the following 
+
+```
+server{
+	# File upload limit. Currently set to match synapse limit
+	client_max_body_size 10M;
+	
+	# Server name, match this to the domain name you set running dependencyinstall.sh
+      	server_name example.com www.example.com;
+
+        # Log location. Change to match server_name
+      	access_log /var/log/nginx/example.com.access_log main;
+      	error_log /var/log/nginx/example.com info;
+
+      	# This is where we put the files we want on our site
+       	root /usr/share/nginx/example.com;
+
+
+
+      	# Here's where it gets interesting: This will send any path that starts
+      	# with /_matrix to our Synapse!
+
+      	location /_matrix {
+      	proxy_pass http://localhost:8008;
+     	}
+}
+```
+
+Verify the syntax of the edited ```nginx.conf```
+
+```
+sudo nginx -t
+```
+
+If no errors, reload nginx
+
+```
+sudo systemctl reload nginx
+```
+
+### Step 4. Let's Encrypt!
+
+Before you start this step, make sure your router is forwarding port 80 and 443 from your servers IP address. Check https://portforward.com/ for more information
+
+Use certbot to fetch a certificate
+
+```
+sudo certbot --nginx -d example.com -d www.example.com
+```
+
+Automate certbot with ```crontab```
+
+```
+sudo crontab -e
+```
+
+Your text editor will open the default crontab which is an empty text file at this point. Paste in the following line, then save and close it:
+
+```
+. . .
+15 3 * * * /usr/bin/certbot renew --quiet
+```
+
+The ```15 3 * * *``` part of this line means “run the following command at 3:15 am, every day”. You may choose any time.
+
+The renew command for Certbot will check all certificates installed on the system and update any that are set to expire in less than thirty days. –quiet tells Certbot not to output information or wait for user input.
+
+cron will now run this command daily. All installed certificates will be automatically renewed and reloaded when they have thirty days or less before they expire.
+
 
