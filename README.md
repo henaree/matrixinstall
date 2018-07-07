@@ -204,7 +204,7 @@ If no errors, reload nginx
 sudo systemctl reload nginx
 ```
 
-### Step 4. Let's Encrypt!
+### Step 5. Let's Encrypt!
 
 Before you start this step, make sure your router is forwarding port 80 and 443 from your servers IP address. Check https://portforward.com/ for more information
 
