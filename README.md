@@ -46,14 +46,17 @@ sudo vi /var/lib/pgsql/data/pg_hba.conf
 
 Find these lines
 
+```
 host		all		all		127.0.0.1/32		ident
 host		all		all		::1/128			ident
+```
 
 Replace ```ident``` with ```md5```
 
+```
 host		all		all		127.0.0.1/32		md5
 host		all		all		::1/128			md5
-
+```
 Now start and enable PostgreSQL:
 
 ```bash
@@ -88,12 +91,6 @@ OWNER synapse_user;
 Exit the propmpt by typing ```\q```
 
 
-
-TODO:
-
-all ports, nginx, Postgresql database setup and matrix useage creation.
-
-
 ## Step 2. Adding Postgresql Database to Synapse
 
 Edit the homeserver.yaml file
@@ -115,8 +112,7 @@ database:
         cp_min: 5
         cp_max: 10
 ```
-In this case, <user> should be ```synapse_user```,```<pass>``` should be the password you set during the user set up, ```db``` is ```synapse``` and ```<host>``` should be ```/var/run/postgresql```
-```
+In this case, ```<user>``` should be ```synapse_user```,```<pass>``` should be the password you set during the user set up, ```db``` is ```synapse``` and ```<host>``` should be ```/var/run/postgresql```
 
 We need to make a dumb change to the pg_hba.conf cus idk why. Something is up the way authentication is being handled.
 
@@ -124,7 +120,7 @@ Deactivate virtual environment by entering the command ```deactivate```
 
 edit pg_hba.conf
 
-```
+```bash
 sudo vi /var/lib/pgsql/data/pg_hba.conf
 ```
 
@@ -157,7 +153,7 @@ source ~/.synapse/bin/activate
 synctl start
 ```
 
-Create a new user. Isername will display publicly as @username:domain.com
+Create a new user. Username will display publicly as @username:domain.com
 
 ```bash
 register_new_matrix_user -c homeserver.yaml http://localhost:8008
