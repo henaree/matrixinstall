@@ -90,13 +90,14 @@ OWNER synapse_user;
 
 Exit the propmpt by typing ```\q```
 
+Exit the postgres user session by typing ```exit```
 
 ## Step 2. Adding Postgresql Database to Synapse
 
 Edit the homeserver.yaml file
 
 ```bash
-vi ~/.synapse homeserver.yaml
+vi ~/.synapse/homeserver.yaml
 ```
 
 Edit the ```#database configuration``` section to resemble the following
@@ -125,7 +126,7 @@ sudo vi /var/lib/pgsql/data/pg_hba.conf
 Find this line
 
 ```
-local   	all            all                                     	peer
+local   	all            all                              peer
 ```
 
 and change it to
