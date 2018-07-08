@@ -14,7 +14,7 @@ Currently only the prerequisites and initial synapse installation has been autom
 Get the script and make it executable
 
 ```bash
-wget https://github.com/henaree/matrixinstall/blob/master/dependencyinstall.sh
+wget https://rawgit.com/henaree/matrixinstall/master/dependencyinstall.sh
 chmod u+x dependencyinstall.sh
 ```
 
