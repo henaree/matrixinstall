@@ -56,7 +56,7 @@ echo
 echo
 echo "Installing postgresql"
 echo
-sudo yum install postgresql-server postgresql-contrib
+sudo yum install postgresql-server postgresql-contrib -y
 echo
 # Code for editing /var/lib/pgsql/data/pg_hba.conf
 echo
@@ -73,7 +73,8 @@ sudo yum install postgresql-devel libpqxx-devel.x86_64 -y
 export PATH=/usr/pgsql-10.2/bin/:$PATH
 pip install psycopg2
 echo
-deactivate
+# deactivate again unneccessary
+# deactivate
 echo
 echo Installing nginx
 echo
