@@ -51,8 +51,8 @@ python -m synapse.app.homeserver \
     --generate-config \
     --report-stats=$answer
 echo
-#exit the virtual environment
-deactivate
+# pretty sure you don't need to deactivate here
+# deactivate
 echo
 echo "Installing postgresql"
 echo
