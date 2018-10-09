@@ -180,7 +180,7 @@ server{
       	error_log /var/log/nginx/example.com info;
 
       	# This is where we put the files we want on our site
-       	root /usr/share/nginx/example.com;
+       	root /usr/share/nginx/html;
 
 
 
@@ -225,7 +225,7 @@ Your text editor will open the default crontab which is an empty text file at th
 
 ```
 . . .
-15 3 * * * /usr/bin/certbot renew --quiet
+15 3 * * * /usr/bin/certbot renew --preferred-challenges http --quiet
 ```
 
 The ```15 3 * * *``` part of this line means “run the following command at 3:15 am, every day”. You may choose any time.
