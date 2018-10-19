@@ -9,7 +9,7 @@ This has been run and tested on CentOS Linux release 7.5.1804 (Core)
 
 # Usage
 
-Currently only the prerequisites and initial synapse installation has been automated. Firewall ports, nginx, Postgresql database setup and matrix useage creation are currently manual.
+Currently only the prerequisites and initial synapse installation has been automated. Firewall ports, nginx, Postgresql database setup and matrix user creation are currently manual.
 
 Get the script and make it executable
 
@@ -24,7 +24,7 @@ Then run it
 sudo ./dependencyinstall.sh
 ```
 
-Enter in the requested input, and the script will create a synapse install with a homesever.yaml file genereated to match the donain name you entered.
+Enter in the requested input, and the script will create a synapse install with a homesever.yaml file genereated to match the domain name you entered.
 
 # After installation
 
@@ -70,7 +70,7 @@ Log in to the postgres user account that was automatically created during instal
 sudo -i -u postgres
 ```
 
-Create a new user called ```synapse_user``` and assign it a password
+Create a new user called ```synapse_user``` and assign a password to it
 
 ```bash
 createuser --pwprompt synapse_user
@@ -115,7 +115,7 @@ database:
 ```
 In this case, ```<user>``` should be ```synapse_user```,```<pass>``` should be the password you set during the user set up, ```db``` is ```synapse``` and ```<host>``` should be ```/var/run/postgresql```
 
-We need to make a dumb change to the pg_hba.conf cus idk why. Something is up the way authentication is being handled.
+We need to make a dumb change to the pg_hba.conf cus idk why. Something is up with the way authentication is being handled.
 
 edit pg_hba.conf
 
